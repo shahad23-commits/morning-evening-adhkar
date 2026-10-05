@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أذكار الصباح والمساء | حصن المسلم</title>
+<meta name="description" content="موقع أذكار الصباح والمساء الصحيحة بمصادرها من الكتاب والسنة - حصنك اليومي">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+</head>
+<body>
+
+<!-- شريط التقدم -->
+<div class="progress-top"><div id="progressBar"></div></div>
+
+<!-- الهيدر -->
+<header class="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+      <span class="logo-icon">☪</span>
+      <div>
+        <strong>حصن المسلم</strong>
+        <small>أذكار الصباح والمساء</small>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <button class="nav-btn active" data-tab="morning">🌅 الصباح</button>
+      <button class="nav-btn" data-tab="evening">🌙 المساء</button>
+      <button class="nav-btn" data-tab="sebha">📿 المسبحة</button>
+      <button class="nav-btn" data-tab="about">📚 المصادر</button>
+    </nav>
+    <div class="nav-actions">
+      <button id="fontPlus" title="تكبير الخط">أ+</button>
+      <button id="themeToggle" title="الوضع الليلي">🌙</button>
+    </div>
+  </div>
+</header>
+
+<!-- الواجهة الرئيسية -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <h1 class="hero-title">أَذْكَارُ الصَّبَاحِ وَالْمَسَاء</h1>
+    <p class="hero-verse">﴿ فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ ﴾ <span>— البقرة 152</span></p>
+    <div class="hero-info">
+      <div class="info-card">
+        <span class="info-icon">📅</span>
+        <div><small>التاريخ الهجري</small><strong id="hijriDate">...</strong></div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🕰️</span>
+        <div><small>الوقت الآن</small><strong id="clock">...</strong></div>
+      </div>
+      <div class="info-card highlight">
+        <span class="info-icon">✨</span>
+        <div><small>الوقت الحالي</small><strong id="timeHint">...</strong></div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong id="statTotal">0</strong><span>ذكر</span></div>
+      <div class="stat"><strong id="statDone">0</strong><span>مكتمل</span></div>
+      <div class="stat"><strong id="statPct">0%</strong><span>التقدم</span></div>
+    </div>
+    <div class="hero-buttons">
+      <button class="btn gold" id="startBtn">ابدأ الذكر الآن ↓</button>
+      <button class="btn ghost" id="resetBtn">↺ إعادة التصفير</button>
+    </div>
+  </div>
+</section>
+
+<!-- البحث -->
+<div class="toolbar" id="mainToolbar">
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="searchInput" placeholder="ابحث في الأذكار... (مثال: الكرسي، الاستغفار)">
+  </div>
+  <div class="filter-box">
+    <button class="chip active" data-filter="all">الكل</button>
+    <button class="chip" data-filter="fav">⭐ المفضلة</button>
+    <button class="chip" data-filter="done">✅ المكتملة</button>
+    <button class="chip" data-filter="todo">⏳ المتبقية</button>
+  </div>
+</div>
+
+<!-- المحتوى -->
+<main class="container">
+  <div id="sectionTitle" class="section-title">
+    <h2>🌅 أذكار الصباح</h2>
+    <p>وقتها من طلوع الفجر إلى طلوع الشمس، وقيل إلى زوال الشمس</p>
+  </div>
+  <div id="adhkarGrid" class="grid"></div>
+
+  <!-- المسبحة -->
+  <div id="sebhaSection" class="sebha hidden">
+    <h2>📿 المسبحة الإلكترونية</h2>
+    <p>اختر الذكر وسبّح بالضغط على الدائرة</p>
+    <div class="sebha-select">
+      <button class="sebha-opt active" data-dhikr="سبحان الله" data-target="33">سبحان الله</button>
+      <button class="sebha-opt" data-dhikr="الحمد لله" data-target="33">الحمد لله</button>
+      <button class="sebha-opt" data-dhikr="الله أكبر" data-target="34">الله أكبر</button>
+      <button class="sebha-opt" data-dhikr="سبحان الله وبحمده" data-target="100">سبحان الله وبحمده</button>
+      <button class="sebha-opt" data-dhikr="أستغفر الله" data-target="100">أستغفر الله</button>
+      <button class="sebha-opt" data-dhikr="لا إله إلا الله" data-target="100">لا إله إلا الله</button>
+    </div>
+    <div class="sebha-circle" id="sebhaCircle">
+      <div class="sebha-num" id="sebhaNum">0</div>
+      <div class="sebha-name" id="sebhaName">سبحان الله</div>
+      <div class="sebha-target" id="sebhaTarget">من 33</div>
+    </div>
+    <button class="btn ghost" id="sebhaReset">تصفير المسبحة</button>
+  </div>
+
+  <!-- المصادر -->
+  <div id="aboutSection" class="about hidden">
+    <h2>📚 منهجية التوثيق والمصادر</h2>
+    <div class="about-card">
+      <p>جميع الأذكار في هذا الموقع <strong>صحيحة وثابتة</strong> عن النبي ﷺ، ومأخوذة من أمهات كتب السنة، واعتمدنا في التصحيح على أحكام الشيخ <strong>محمد ناصر الدين الألباني</strong> رحمه الله، وكتاب <strong>حصن المسلم</strong> للشيخ سعيد القحطاني.</p>
+      <div class="sources-grid">
+        <div class="src"><strong>صحيح البخاري</strong><span>الإمام محمد بن إسماعيل البخاري</span></div>
+        <div class="src"><strong>صحيح مسلم</strong><span>الإمام مسلم بن الحجاج</span></div>
+        <div class="src"><strong>سنن أبي داود</strong><span>رقم الحديث مذكور تحت كل ذكر</span></div>
+        <div class="src"><strong>سنن الترمذي</strong><span>رقم الحديث مذكور تحت كل ذكر</span></div>
+        <div class="src"><strong>سنن النسائي وابن ماجه</strong><span>مع التصحيح</span></div>
+        <div class="src"><strong>مسند الإمام أحمد</strong><span>مع التخريج</span></div>
+      </div>
+      <div class="note">
+        <strong>⚠️ تنبيه:</strong> تجنّبنا الأحاديث الضعيفة والموضوعة، وكل ذكر مذكور تحته <em>المصدر + رقم الحديث + درجته + فضله</em>. من وجد خطأ فليُنبّهنا مأجورًا.
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- الفوتر -->
+<footer>
+  <div class="foot-pattern"></div>
+  <p class="foot-dua">﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾ — الرعد 28</p>
+  <p>صُنع بحب لخدمة الإسلام • جميع الأذكار موثقة بمصادرها • انشر تؤجر</p>
+  <div class="foot-btns">
+    <button id="copyAll" class="btn gold small">📋 نسخ الأذكار</button>
+    <button id="shareBtn" class="btn ghost small">🔗 مشاركة الموقع</button>
+  </div>
+</footer>
+
+<!-- زر الصعود -->
+<button id="toTop" title="العودة للأعلى">↑</button>
+
+<script src="adhkar-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
